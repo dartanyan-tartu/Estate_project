@@ -1,0 +1,39 @@
+{% extends "properties/base.html" %}
+{% load static %}
+{% block content %}
+<h2 class="mb-4">Недвижимость</h2>
+
+<!-- Сетка Bootstrap -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for prop in properties %}
+        <div class="col">
+            <!-- Карточка -->
+            <div class="card h-100 shadow-sm border-0 rounded-3">
+                <!-- Фото -->
+                {% if prop.image %}
+                    <img src="{{ prop.image.url }}" class="card-img-top" alt="{{ prop.title }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x200?text=Нет+фото" class="card-img-top" alt="Нет фото" style="height: 200px; object-fit: cover;">
+                {% endif %}
+
+                <!-- Тело карточки -->
+                <div class="card-body">
+                    <h5 class="card-title">{{ prop.title }}</h5>
+                    <p class="card-text text-muted">{{ prop.description|truncatewords:15 }}</p>
+                    <p><strong>Цена:</strong> {{ prop.price }} ₽</p>
+                    <p><strong>Площадь:</strong> {{ prop.area }} м²</p>
+                </div>
+
+                <!-- Кнопка -->
+                <div class="card-footer bg-white border-0">
+                    <a href="{% url 'property_detail' prop.id %}" class="btn btn-primary w-100">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">Недвижимость пока не добавлена.</div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

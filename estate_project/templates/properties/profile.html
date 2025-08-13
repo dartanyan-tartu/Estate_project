@@ -1,0 +1,10 @@
+{% extends "properties/base.html" %}
+{% block content %}
+<div class="text-center my-5">
+  <h2>Профиль пользователя</h2>
+  <p><strong>Добро пожаловать, {{ user.username }}!</strong></p>
+  <p>Вы успешно вошли в систему.</p>
+  <a href="{% url 'index' %}" class="btn btn-primary me-2">На главную</a>
+  <a href="{% url 'logout' %}" class="btn btn-outline-secondary">Выход</a>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "properties/base.html" %}
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">Регистрация</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="error">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="auth-btn">Зарегистрироваться</button>
+    </form>
+    <p class="auth-footer">
+      Уже есть аккаунт? <a href="{% url 'login' %}" class="auth-link">Войти</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
