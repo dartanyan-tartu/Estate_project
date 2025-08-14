@@ -1,0 +1,28 @@
+# Виртуальное окружение
+venv/
+env/
+envs/
+.venv/
+__pycache__/
+*.pyc
+
+# Django
+staticfiles/
+media/
+*.log
+local_settings.py
+
+# IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# База данных
+db.sqlite3
+
+# Кэш
+__pycache__/
+*.pyc

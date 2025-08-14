@@ -1,28 +1,45 @@
 {% extends "properties/base.html" %}
 {% block content %}
-<div class="auth-container">
-  <div class="auth-card">
-    <h2 class="auth-title">Вход</h2>
-    <form method="post">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="username" class="form-label">Имя пользователя</label>
-        <input type="text" name="username" id="username" class="form-input" required>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0" style="border-radius: 20px; overflow: hidden;">
+        <!-- Заголовок -->
+        <div class="bg-primary text-white text-center py-4">
+          <h2 class="mb-0">Вход в аккаунт</h2>
+        </div>
+
+        <!-- Форма -->
+        <div class="card-body p-4">
+          <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="username" class="form-label text-muted small">Имя пользователя</label>
+              <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label text-muted small">Пароль</label>
+              <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-danger alert-sm small">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary w-100 mt-3">Войти</button>
+          </form>
+
+          <!-- Ссылка -->
+          <p class="text-center mt-3 text-muted small">
+            Нет аккаунта? <a href="{% url 'register' %}" class="text-primary">Зарегистрироваться</a>
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password" class="form-label">Пароль</label>
-        <input type="password" name="password" id="password" class="form-input" required>
-      </div>
-      {% if messages %}
-        {% for message in messages %}
-          <div class="error">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-      <button type="submit" class="auth-btn">Войти</button>
-    </form>
-    <p class="auth-footer">
-      Нет аккаунта? <a href="{% url 'register' %}" class="auth-link">Зарегистрироваться</a>
-    </p>
+    </div>
   </div>
 </div>
 {% endblock %}

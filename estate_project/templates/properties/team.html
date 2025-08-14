@@ -1,24 +1,36 @@
 {% extends "properties/base.html" %}
 {% load static %}
 {% block content %}
-<div class="container my-5">
+<div class="container my-5 text-dark">
   <h2 class="text-center mb-5">Наши сотрудники</h2>
 
-  <div class="row g-5">
-    {% for emp in employees %}
-      <div class="col-md-4 text-center">
-        <img src="{{ emp.image.url }}" class="rounded-circle mb-3" alt="{{ emp.name }}" width="120" height="120" style="object-fit: cover;">
-        <h5>{{ emp.name }}</h5>
-        <p class="text-muted">{{ emp.position }}</p>
-        <p>
-          <small>
-            📞 {{ emp.phone }}<br>
-            ✉️ {{ emp.email }}
-          </small>
-        </p>
-      </div>
-    {% endfor %}
-  </div>
+  {% if employees %}
+    <div class="row g-5">
+      {% for emp in employees %}
+        <div class="col-md-4 text-center">
+          {% if emp.image %}
+            <img src="{{ emp.image.url }}" class="rounded-circle mb-3" alt="{{ emp.name }}" width="120" height="120" style="object-fit: cover;">
+          {% else %}
+            <img src="https://via.placeholder.com/120/2c3e50/FFFFFF?text={{ emp.name|slice:":1" }}" 
+                 class="rounded-circle mb-3" alt="Нет фото" width="120" height="120" style="object-fit: cover;">
+          {% endif %}
+
+          <h5 class="text-dark">{{ emp.name }}</h5>
+          <p class="text-muted">{{ emp.position }}</p>
+          <p class="text-dark">
+            <small>
+              📞 {{ emp.phone }}<br>
+              ✉️ {{ emp.email }}
+            </small>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center">
+      <p class="text-muted">Сотрудники пока не добавлены.</p>
+    </div>
+  {% endif %}
 
   <div class="text-center mt-5">
     <a href="{% url 'index' %}" class="btn btn-outline-primary">← Вернуться к каталогу</a>
