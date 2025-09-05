@@ -1,0 +1,42 @@
+{% extends "properties/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-5">Наши сотрудники</h2>
+
+  <div class="row g-5">
+    {% for emp in employees %}
+      <div class="col-md-4 text-center">
+        <!-- Фото -->
+        {% if emp.image %}
+          <img src="{{ emp.image.url }}" class="rounded-circle mb-3" alt="{{ emp.name }}" width="120" height="120" style="object-fit: cover;">
+        {% else %}
+          <img src="https://via.placeholder.com/120/2c3e50/FFFFFF?text={{ emp.name|slice:":1" }}" 
+               class="rounded-circle mb-3" alt="Нет фото" width="120" height="120" style="object-fit: cover;">
+        {% endif %}
+
+        <!-- Имя -->
+        <h5>{{ emp.name }}</h5>
+        <!-- Должность -->
+        <p class="text-muted">{{ emp.position }}</p>
+
+        <!-- Контакты -->
+        <p>
+          <small>
+            📞 
+            <a href="tel:{{ emp.phone|urlencode }}" class="text-primary text-decoration-none">
+              {{ emp.phone }}
+            </a>
+            <br>
+            ✉️ {{ emp.email }}
+          </small>
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'index' %}" class="btn btn-outline-primary">← Вернуться к каталогу</a>
+  </div>
+</div>
+{% endblock %}

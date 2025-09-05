@@ -1,0 +1,48 @@
+{% extends "properties/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5 text-dark">
+  <div class="row align-items-start g-5">
+    
+{% comment %} Фото  {% endcomment %}
+    <div class="col-md-6">
+      {% if property.image %}
+        <img src="{{ property.image.url }}" 
+             class="img-fluid rounded shadow-sm" 
+             alt="{{ property.title }}" 
+             style="width: 100%; height: 700px; object-fit: cover;">
+      {% else %}
+        <img src="https://via.placeholder.com/600x450?text=Нет+фото" 
+             class="img-fluid rounded" 
+             alt="Нет фото" 
+             style="width: 100%; height: 450px; object-fit: cover;">
+      {% endif %}
+    </div>
+
+{% comment %} Описание и характеристики {% endcomment %}
+    <div class="col-md-6">
+      <h1 class="mb-3">{{ property.title }}</h1>
+      
+      <p class="lead text-muted">{{ property.description }}</p>
+
+{% comment %} Характеристики  {% endcomment %}
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item py-3">
+          <strong>Цена:</strong> 
+          <span class="text-success fs-5">{{ property.price }} ₽</span>
+        </li>
+        <li class="list-group-item py-2"><strong>Местоположение:</strong> {{ property.location }}</li>
+        <li class="list-group-item py-2"><strong>Спальни:</strong> {{ property.bedrooms }}</li>
+        <li class="list-group-item py-2"><strong>Ванные:</strong> {{ property.bathrooms }}</li>
+        <li class="list-group-item py-2"><strong>Площадь:</strong> {{ property.area }} м²</li>
+      </ul>
+
+{% comment %} Кнопка "Назад"  {% endcomment %}
+      <a href="{% url 'index' %}" class="btn btn-outline-primary btn-lg">
+        ← Назад к списку
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
