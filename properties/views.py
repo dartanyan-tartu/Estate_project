@@ -67,7 +67,6 @@ class PropertyDetailView(DetailView):
     model = Property
     template_name = 'properties/property_detail.html'
     context_object_name = 'property'
-    pk_url_kwarg = 'prop_id'
 
     def get_queryset(self):
         return Property.objects.filter(is_published=True)
@@ -92,7 +91,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        profile = Profile.objects.get_or_create(user=self.request.user)
         context['profile'] = profile
         return context
 
