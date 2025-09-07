@@ -1,0 +1,15 @@
+{% extends "properties/base.html" %}
+{% block content %}
+<div class="text-center my-5">
+  <h2>Профиль пользователя</h2>
+  <p><strong>Добро пожаловать, {{ user.username }}!</strong></p>
+  <p>Вы успешно вошли в систему.</p>
+  <a href="{% url 'index' %}" class="btn btn-primary me-2">На главную</a>
+  
+  <!-- Форма выхода (POST) -->
+  <form action="{% url 'logout' %}" method="post" class="d-inline">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-secondary">Выход</button>
+  </form>
+</div>
+{% endblock %}
